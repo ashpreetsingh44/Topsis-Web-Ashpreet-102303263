@@ -29,7 +29,7 @@ def app(request):
         return """
         <html><body>
         <h2>TOPSIS Web Service</h2>
-        <form method="POST" action="/api" enctype="multipart/form-data">
+        <form method="POST" enctype="multipart/form-data">
         CSV File: <input type="file" name="file" required><br><br>
         Weights: <input name="weights" value="1,1,1,1"><br><br>
         Impacts: <input name="impacts" value="+,+,-,+"><br><br>
