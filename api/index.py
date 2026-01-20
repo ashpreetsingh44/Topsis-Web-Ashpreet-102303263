@@ -1,4 +1,3 @@
-
 import pandas as pd
 import numpy as np
 from io import StringIO
@@ -25,20 +24,19 @@ def topsis(df, weights, impacts):
     df["Rank"] = df["Topsis Score"].rank(ascending=False).astype(int)
     return df
 
-def handler(request):
+def app(request):
     if request.method == "GET":
-        html = '''
+        return """
         <html><body>
         <h2>TOPSIS Web Service</h2>
-        <form method="POST" action="/api/index.py" enctype="multipart/form-data">
+        <form method="POST" action="/api" enctype="multipart/form-data">
         CSV File: <input type="file" name="file" required><br><br>
         Weights: <input name="weights" value="1,1,1,1"><br><br>
         Impacts: <input name="impacts" value="+,+,-,+"><br><br>
         <button type="submit">Get Result</button>
         </form>
         </body></html>
-        '''
-        return html, 200, {"Content-Type": "text/html"}
+        """, 200, {"Content-Type": "text/html"}
 
     file = request.files.get("file")
     weights = list(map(float, request.form.get("weights").split(",")))
